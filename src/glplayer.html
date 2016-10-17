@@ -2,9 +2,13 @@
 <html>
 	<head>
 		<link type="text/css" href="./Css/screen.css" rel="stylesheet" />
+		<link type="text/css" href="./jquery/jquery-ui.css" rel="stylesheet" />
 
 		<title> jsmpeg player </title>
-		
+
+		<script type="text/javascript" src="./jquery/jquery.js"></script>	
+		<script type="text/javascript" src="./jquery/jquery-ui.js"></script>
+	 
 		<script type="text/javascript" src="sylvester.js"></script>
 		<script type="text/javascript" src="glUtils.js"></script>
 		<script type="text/javascript" src="TextCanvas.js"></script>
@@ -22,11 +26,12 @@
 		</tr>
 		<tr><th>
 			<table width="100%">
-				<td width="10%"> 
+				<th width="10%"> 
 			   		<button type="button" id="btnPlayVideo">Play button </button>	
-				</td>
-				<td width="80%"> Progress </td> 
-				<td width = "10%"> layout </td>
+				</th>
+				<th width="80%"> <div id="timeSlider"></div>
+ </th> 
+ <th width = "10%"><label id="lblTimeProgress"></label>  </th>
 			</table>
 		</th></tr>
 		</table>
