@@ -416,6 +416,7 @@ jsmpeg.prototype.updateLoaderGL = function( ev ) {
 
 
 jsmpeg.prototype.loadCallback = function(file) {
+	console.log("init bitreader");
 	this.buffer = new BitReader(file);
 
 	if( this.seekable ) {
@@ -971,8 +972,8 @@ jsmpeg.prototype.initWebGL = function() {
 	}
 
 	// init buffers
-	this.buffer = gl.createBuffer();
-	gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
+	this.vtxbuffer = gl.createBuffer();
+	gl.bindBuffer(gl.ARRAY_BUFFER, this.vtxbuffer);
 	gl.bufferData(gl.ARRAY_BUFFER, this.VtxArray, gl.STATIC_DRAW);
 
 	// The main YCbCrToRGBA Shader
@@ -1014,6 +1015,8 @@ jsmpeg.prototype.initWebGL = function() {
 jsmpeg.prototype.renderFrameGL = function() {
 
 	var gl = this.gl;
+
+	this.setVtxBuffer();
 	this.setTexCordBuffer();
 	
 	// WebGL doesn't like Uint8ClampedArrays, so we have to create a Uint8Array view for
@@ -1080,8 +1083,8 @@ jsmpeg.prototype.setTexCordBuffer = function() {
 
 jsmpeg.prototype.setVtxBuffer = function() {
 	var gl = this.gl;
-	this.buffer = gl.createBuffer();
-	gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
+	this.vtxbuffer = gl.createBuffer();
+	gl.bindBuffer(gl.ARRAY_BUFFER, this.vtxbuffer);
 	gl.bufferData(gl.ARRAY_BUFFER, this.VtxArray, gl.STATIC_DRAW);
 
 };
