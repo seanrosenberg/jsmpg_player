@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link type="text/css" href="./Css/screen.css" rel="stylesheet" />
+
+		<title> jsmpeg player </title>
+		
+		<script type="text/javascript" src="sylvester.js"></script>
+		<script type="text/javascript" src="glUtils.js"></script>
+		<script type="text/javascript" src="TextCanvas.js"></script>
+		<script type="text/javascript" src="jsmpg.js"></script>
+		<script type="text/javascript" src="PIplayer.js"></script>
+		
+	</head>
+	<body onload="PIplayer()">
+		<table>
+		<tr>
+			<th>
+				<canvas id="videocanvas" width="640" height="480"></canvas>
+				<canvas id="textcanvas" width="640" height="480"></canvas>
+			</th>
+		</tr>
+		<tr><th>
+			<table width="100%">
+				<td width="10%"> 
+			   		<button type="button" id="btnPlayVideo">Play button </button>	
+				</td>
+				<td width="80%"> Progress </td> 
+				<td width = "10%"> layout </td>
+			</table>
+		</th></tr>
+		</table>
+	</body>
+
+</html>

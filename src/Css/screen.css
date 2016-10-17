@@ -1,0 +1,10 @@
+#videocanvas {
+}
+
+#textcanvas {
+    background-color: transparent;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    z-index: 10;
+}
