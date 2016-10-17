@@ -614,7 +614,7 @@ jsmpeg.prototype.scheduleNextFrame = function() {
 	this.lateTime = this.now() - this.targetTime;
 	var wait = Math.max(0, (1000/this.pictureRate) - this.lateTime);
 	this.targetTime = this.now() + wait;
-
+	this.setVtxBuffer();
 	if( this.benchmark ) {
 		this.benchFrame++;
 		if( this.benchFrame >= 120 ) {
@@ -1012,7 +1012,6 @@ jsmpeg.prototype.initWebGL = function() {
 jsmpeg.prototype.renderFrameGL = function() {
 
 	var gl = this.gl;
-
 	this.setTexCordBuffer();
 	
 	// WebGL doesn't like Uint8ClampedArrays, so we have to create a Uint8Array view for
