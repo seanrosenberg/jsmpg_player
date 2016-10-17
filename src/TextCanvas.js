@@ -24,7 +24,7 @@ TextCanvas.prototype.init2DCanvas = function() {
 TextCanvas.prototype.drawText = function(word) {
     var ctx = this.context2D;
     if (ctx) {
-        ctx.font = "100px Verdana";
+        ctx.font = "50px Verdana";
         //Create gradient
         var gradient = ctx.createLinearGradient(0, 0, this.width, 0);
         gradient.addColorStop("0", "yellow");

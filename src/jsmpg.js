@@ -614,7 +614,6 @@ jsmpeg.prototype.scheduleNextFrame = function() {
 	this.lateTime = this.now() - this.targetTime;
 	var wait = Math.max(0, (1000/this.pictureRate) - this.lateTime);
 	this.targetTime = this.now() + wait;
-	this.setVtxBuffer();
 	if( this.benchmark ) {
 		this.benchFrame++;
 		if( this.benchFrame >= 120 ) {
@@ -712,29 +711,32 @@ jsmpeg.prototype.initBuffers = function() {
 	this.forwardCb = new MaybeClampedUint8Array(this.codedSize >> 2);
 	this.forwardCb32 = new Uint32Array(this.forwardCb.buffer);
 
-	this.canvas.width = this.width;
-	this.canvas.height = this.height;
-	this.textcanvas.width = this.width;
-	this.textcanvas.height = this.height;
+	this.resizeCanvas(this.width/2, this.height/2);
+
+  };
+
+jsmpeg.prototype.resizeCanvas = function(w, h) {
+	this.textcanvas.width = this.canvas.width = w;
+	this.textcanvas.height = this.canvas.height = h;
 	this.TextCanvasRenderer = new TextCanvas(
 	 {
 	 	textcanvas: this.textcanvas,
-		width: this.width,
-		height: this.height
+		width: this.textcanvas.width,
+		height: this.textcanvas.height
 	 }
 	);
 
 	if( this.gl ) {
 		this.gl.useProgram(this.program);
-		this.gl.viewport(0, 0, this.width, this.height);
+		this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
 	}
 	else {
-		this.currentRGBA = this.canvasContext.getImageData(0, 0, this.width, this.height);
+		this.currentRGBA = this.canvasContext.getImageData(0, 0, this.canvas.width, this.canvas.height);
 		this.fillArray(this.currentRGBA.data, 255);
 	}
+
+
 };
-
-
 
 
 // ----------------------------------------------------------------------------
