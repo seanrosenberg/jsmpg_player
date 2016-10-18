@@ -5,7 +5,9 @@
 		<link type="text/css" href="./jquery/jquery-ui.css" rel="stylesheet" />
 
 		<title> jsmpeg player </title>
+		<script type="text/javascript" src="Utils.js"></script>
 
+		<script type="text/javascript" src="./jquery/jquery.js"></script>	
 		<script type="text/javascript" src="./jquery/jquery.js"></script>	
 		<script type="text/javascript" src="./jquery/jquery-ui.js"></script>
 	 
@@ -24,16 +26,18 @@
 				<canvas id="textcanvas" width="640" height="480"></canvas>
 			</th>
 		</tr>
-		<tr><th>
+		<tr>
+			<th>
 			<table width="100%">
-				<th width="10%"> 
+				<td width="10%"> 
 			   		<button type="button" id="btnPlayVideo">Play button </button>	
-				</th>
-				<th width="80%"> <div id="timeSlider"></div>
- </th> 
- <th width = "10%"><label id="lblTimeProgress"></label>  </th>
+				</td>
+				<td width="1%"></td>
+				<td width="79%"> <div id="timeSlider"></div></td> 
+ 				<td width = "10%"><label id="lblTimeProgress"> </label></td>
 			</table>
-		</th></tr>
+			</th>
+		</tr>
 		</table>
 	</body>
 

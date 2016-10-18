@@ -34,15 +34,28 @@ function PlayOrPauseVideo() {
 }
 
 function PlayerOnLoad() {
-	$("#timeSlider").slider("option", "min", 0);
-	$("#timeSlider").slider("option", "max", piplayer.duration);
-
+    $("#timeSlider").slider("option", "min", 0);
+    $("#timeSlider").slider("option", "max", piplayer.duration);
+	SetTimeProgress(0);
     console.log("total duratopn %d s", piplayer.duration);
+}
+
+function SetTimeProgress(time_in_second) {
+    var time_progress_str;
+    if (time_in_second === 0) {
+        time_progress_str = "0".toHHMMSS() + "/" + piplayer.duration.toString().toHHMMSS();
+
+    } else if (time_in_second > 0) {
+        time_progress_str = time_in_second.toString().toHHMMSS() + "/" + piplayer.duration.toString().toHHMMSS();
+
+    } else {}
+    $("#lblTimeProgress").text(time_progress_str);
+
 }
 
 function DecodeReportProgress() {
 
-	$("#timeSlider").slider("option", "value", piplayer.currentTime);
+    $("#timeSlider").slider("option", "value", piplayer.currentTime);
     console.log("current time %d s", piplayer.currentTime);
     console.log("current frame %d / frame count %d", piplayer.currentFrame, piplayer.frameCount);
 
@@ -54,7 +67,6 @@ function FinishDecode() {
 }
 
 
-
 //
 //
 //
@@ -63,26 +75,23 @@ function FinishDecode() {
 //
 //
 
-$(document).ready(function(){
-	initSlider();
-	initPlayButton();
+$(document).ready(function() {
+    initSlider();
+    initPlayButton();
 });
 
 function initSlider() {
-   $("#timeSlider").slider({
-		animate: "fast",
-		change: function(event, ui) {
-			var target_second = ui.value;
-		}
-	});
+    $("#timeSlider").slider({
+        animate: "fast",
+        change: function(event, ui) {
+            var target_second = ui.value;
+			SetTimeProgress(ui.value);
+        }
+    });
 
 }
 
 function initPlayButton() {
-	$("#btnPlayVideo").button({});
-	$("#btnPlayVideo").click(PlayOrPauseVideo);
+    $("#btnPlayVideo").button({});
+    $("#btnPlayVideo").click(PlayOrPauseVideo);
 }
-
-
-
-
