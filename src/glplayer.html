@@ -1,44 +1,107 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<link type="text/css" href="./Css/screen.css" rel="stylesheet" />
-		<link type="text/css" href="./jquery/jquery-ui.css" rel="stylesheet" />
 
-		<title> jsmpeg player </title>
-		<script type="text/javascript" src="Utils.js"></script>
+<head>
+    <link type="text/css" href="./Css/screen.css" rel="stylesheet" />
+    <link type="text/css" href="./jquery/jquery-ui.css" rel="stylesheet" />
 
-		<script type="text/javascript" src="./jquery/jquery.js"></script>	
-		<script type="text/javascript" src="./jquery/jquery.js"></script>	
-		<script type="text/javascript" src="./jquery/jquery-ui.js"></script>
-	 
-		<script type="text/javascript" src="sylvester.js"></script>
-		<script type="text/javascript" src="glUtils.js"></script>
-		<script type="text/javascript" src="TextCanvas.js"></script>
-		<script type="text/javascript" src="jsmpg.js"></script>
-		<script type="text/javascript" src="PIplayer.js"></script>
-		
-	</head>
-	<body onload="PIplayer()">
-		<table>
+    <title> jsmpeg player </title>
+	<script type="text/javascript" src="Utils.js"></script>
+	<script type="text/javascript" src="vtx.js"></script>
+    <script type="text/javascript" src="txt.js"></script>
+
+	
+    <script type="text/javascript" src="./jquery/jquery.js"></script>
+    <script type="text/javascript" src="./jquery/jquery.js"></script>
+    <script type="text/javascript" src="./jquery/jquery-ui.js"></script>
+
+    <script type="text/javascript" src="./3rd/sylvester.js"></script>
+    <script type="text/javascript" src="./3rd/glUtils.js"></script>
+    <script type="text/javascript" src="TextCanvas.js"></script>
+    <script type="text/javascript" src="./3rd/jsmpg.js"></script>
+    <script type="text/javascript" src="PIplayer.js"></script>
+
+</head>
+
+<body onload="PIplayer()">
+    <table>
+        <tr>
+            <th>
+                <canvas id="videocanvas" width="640" height="480"></canvas>
+                <canvas id="textcanvas" width="640" height="480"></canvas>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <table width="100%">
+                    <tr>
+                        <td width="10%">
+                            <button type="button" id="btnPlayVideo">Play button </button>
+                        </td>
+                        <td width="1%"></td>
+                        <td width="79%">
+                            <div id="timeSlider"></div>
+						</td>
+						<td width="1%"></td>
+                        <td width="10%"><label id="lblTimeProgress"> </label></td>
+                    </tr>
+                </table>
+            </th>
+		</tr>
+		<!-- <tr> -->
+		<!--     <th> -->
+		<!--         <table width="100%"> -->
+		<!--             <tr> -->
+		<!--                 <td width="10%"> Move x  </td> -->
+        <!--                 <td width="1%"></td> -->
+		<!--                 <td width="79%"><div id="xshiftSlider"></div></td> -->
+		<!--                 <td width="1%"></td> -->
+		<!--                 <td width="10%"><label id="lblMoveX"> </label></td> -->
+		<!--             </tr> -->
+		<!--         </table> -->
+		<!--     </th> -->
+		<!-- </tr> -->
+		<!-- <tr> -->
+		<!--     <th> -->
+		<!--         <table width="100%"> -->
+		<!--             <tr> -->
+		<!--                 <td width="10%"> Move y  </td> -->
+        <!--                 <td width="1%"></td> -->
+		<!--                 <td width="79%"><div id="yshiftSlider"></div></td> -->
+		<!--                 <td width="1%"></td> -->
+		<!--                 <td width="10%"><label id="lblMoveY"> </label></td> -->
+		<!--             </tr> -->
+		<!--         </table> -->
+		<!--     </th> -->
+		<!-- </tr> -->
 		<tr>
 			<th>
-				<canvas id="videocanvas" width="640" height="480"></canvas>
-				<canvas id="textcanvas" width="640" height="480"></canvas>
+				<table width="100%">
+					<tr>
+						<td width="10%"> Zoom  </td>
+						<td width="1%"></td>
+						<td width="79%"><div id="zshiftSlider"></div></td>
+						<td width="1%"></td>
+						<td width="10%"><label id="lblMoveZ"> </label></td>
+					</tr>
+				</table>
 			</th>
 		</tr>
 		<tr>
-			<th>
-			<table width="100%">
-				<td width="10%"> 
-			   		<button type="button" id="btnPlayVideo">Play button </button>	
-				</td>
-				<td width="1%"></td>
-				<td width="79%"> <div id="timeSlider"></div></td> 
- 				<td width = "10%"><label id="lblTimeProgress"> </label></td>
-			</table>
-			</th>
+   <!--          <th> -->
+				<!-- <table width="50"> -->
+				<!--     <tr> -->
+				<!--         <td width="40%"> Enter your note  </td> -->
+				<!--         <td width="1%"></td> -->
+				<!--         <td width="59%">  -->
+				<!--             <input id="Note"> -->
+				<!--           </td> -->
+				<!--     </tr> -->
+				<!-- </table> -->
+                <!--  -->
+			<!-- </th> -->
 		</tr>
-		</table>
-	</body>
+    </table>
+</body>
 
 </html>
