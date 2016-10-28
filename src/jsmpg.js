@@ -416,6 +416,7 @@ jsmpeg.prototype.updateLoaderGL = function( ev ) {
 
 
 jsmpeg.prototype.loadCallback = function(file) {
+	console.log("init bitreader");
 	this.buffer = new BitReader(file);
 
 	if( this.seekable ) {
@@ -614,7 +615,6 @@ jsmpeg.prototype.scheduleNextFrame = function() {
 	this.lateTime = this.now() - this.targetTime;
 	var wait = Math.max(0, (1000/this.pictureRate) - this.lateTime);
 	this.targetTime = this.now() + wait;
-	this.setVtxBuffer();
 	if( this.benchmark ) {
 		this.benchFrame++;
 		if( this.benchFrame >= 120 ) {
@@ -712,29 +712,32 @@ jsmpeg.prototype.initBuffers = function() {
 	this.forwardCb = new MaybeClampedUint8Array(this.codedSize >> 2);
 	this.forwardCb32 = new Uint32Array(this.forwardCb.buffer);
 
-	this.canvas.width = this.width;
-	this.canvas.height = this.height;
-	this.textcanvas.width = this.width;
-	this.textcanvas.height = this.height;
+	this.resizeCanvas(this.width/2, this.height/2);
+
+  };
+
+jsmpeg.prototype.resizeCanvas = function(w, h) {
+	this.textcanvas.width = this.canvas.width = w;
+	this.textcanvas.height = this.canvas.height = h;
 	this.TextCanvasRenderer = new TextCanvas(
 	 {
 	 	textcanvas: this.textcanvas,
-		width: this.width,
-		height: this.height
+		width: this.textcanvas.width,
+		height: this.textcanvas.height
 	 }
 	);
 
 	if( this.gl ) {
 		this.gl.useProgram(this.program);
-		this.gl.viewport(0, 0, this.width, this.height);
+		this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
 	}
 	else {
-		this.currentRGBA = this.canvasContext.getImageData(0, 0, this.width, this.height);
+		this.currentRGBA = this.canvasContext.getImageData(0, 0, this.canvas.width, this.canvas.height);
 		this.fillArray(this.currentRGBA.data, 255);
 	}
+
+
 };
-
-
 
 
 // ----------------------------------------------------------------------------
@@ -969,8 +972,8 @@ jsmpeg.prototype.initWebGL = function() {
 	}
 
 	// init buffers
-	this.buffer = gl.createBuffer();
-	gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
+	this.vtxbuffer = gl.createBuffer();
+	gl.bindBuffer(gl.ARRAY_BUFFER, this.vtxbuffer);
 	gl.bufferData(gl.ARRAY_BUFFER, this.VtxArray, gl.STATIC_DRAW);
 
 	// The main YCbCrToRGBA Shader
@@ -1012,6 +1015,8 @@ jsmpeg.prototype.initWebGL = function() {
 jsmpeg.prototype.renderFrameGL = function() {
 
 	var gl = this.gl;
+
+	this.setVtxBuffer();
 	this.setTexCordBuffer();
 	
 	// WebGL doesn't like Uint8ClampedArrays, so we have to create a Uint8Array view for
@@ -1078,8 +1083,8 @@ jsmpeg.prototype.setTexCordBuffer = function() {
 
 jsmpeg.prototype.setVtxBuffer = function() {
 	var gl = this.gl;
-	this.buffer = gl.createBuffer();
-	gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
+	this.vtxbuffer = gl.createBuffer();
+	gl.bindBuffer(gl.ARRAY_BUFFER, this.vtxbuffer);
 	gl.bufferData(gl.ARRAY_BUFFER, this.VtxArray, gl.STATIC_DRAW);
 
 };
